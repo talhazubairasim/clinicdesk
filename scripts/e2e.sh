@@ -38,10 +38,10 @@ if [ -z "$NOW_SLOT" ]; then NOW_SLOT=$SLOT; VISIT=$APPT; else
 if [ "$(json POST "/api/appointments/$VISIT/check-in" | jq -r .status)" = CheckedIn ]; then
   [ "$(json POST "/api/appointments/$VISIT/complete" | jq -r .status)" = Completed ] && pass "visit checked in and completed" || fail "visit checked in and completed"
   INV=$(json POST /api/invoices "{\"patientId\":\"$PAT\",\"appointmentId\":\"$VISIT\",\"taxRate\":0.1,\"lines\":[{\"description\":\"Consultation\",\"quantity\":1,\"unitPrice\":2000}]}" | jq -r .id)
-  [ "$(json POST "/api/invoices/$INV/issue" '{}' | jq -r .total)" = 2200 ] && pass "invoice issued for 2200" || fail "invoice issued for 2200"
+  [ "$(json POST "/api/invoices/$INV/issue" '{}' | jq '.total == 2200')" = true ] && pass "invoice issued for 2200" || fail "invoice issued for 2200"
   json POST "/api/invoices/$INV/payments" '{"amount":200,"method":"Cash"}' >/dev/null
   [ "$(json POST "/api/invoices/$INV/payments" '{"amount":2000,"method":"Card"}' | jq -r .status)" = Paid ] && pass "invoice paid in two payments" || fail "invoice paid in two payments"
-  [ "$(json GET /api/dashboard | jq -r .collectedThisMonth)" = 2200 ] && pass "dashboard shows 2200 collected" || fail "dashboard shows 2200 collected"
+  [ "$(json GET /api/dashboard | jq '.collectedThisMonth == 2200')" = true ] && pass "dashboard shows 2200 collected" || fail "dashboard shows 2200 collected"
 else
   echo "  - skipped visit/invoice checks (no slot within 2 hours)"
 fi
