@@ -1,0 +1,37 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFA3}") = "ClinicDesk.Domain", "src\ClinicDesk.Domain\ClinicDesk.Domain.csproj", "{B06BBCEE-7B2B-594C-9A5C-5E29EA44ABEE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFA3}") = "ClinicDesk.Api", "src\ClinicDesk.Api\ClinicDesk.Api.csproj", "{568FBDE1-7A89-58B2-9096-6E249EB26737}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFA3}") = "ClinicDesk.Domain.Tests", "tests\ClinicDesk.Domain.Tests\ClinicDesk.Domain.Tests.csproj", "{3D0CCE67-98F5-5105-B899-06F9C1098219}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFA3}") = "ClinicDesk.Api.Tests", "tests\ClinicDesk.Api.Tests\ClinicDesk.Api.Tests.csproj", "{B333BBF2-9D2E-53DB-A073-9FC83665DB17}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B06BBCEE-7B2B-594C-9A5C-5E29EA44ABEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B06BBCEE-7B2B-594C-9A5C-5E29EA44ABEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B06BBCEE-7B2B-594C-9A5C-5E29EA44ABEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B06BBCEE-7B2B-594C-9A5C-5E29EA44ABEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{568FBDE1-7A89-58B2-9096-6E249EB26737}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{568FBDE1-7A89-58B2-9096-6E249EB26737}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{568FBDE1-7A89-58B2-9096-6E249EB26737}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{568FBDE1-7A89-58B2-9096-6E249EB26737}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D0CCE67-98F5-5105-B899-06F9C1098219}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D0CCE67-98F5-5105-B899-06F9C1098219}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D0CCE67-98F5-5105-B899-06F9C1098219}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D0CCE67-98F5-5105-B899-06F9C1098219}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B333BBF2-9D2E-53DB-A073-9FC83665DB17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B333BBF2-9D2E-53DB-A073-9FC83665DB17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B333BBF2-9D2E-53DB-A073-9FC83665DB17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B333BBF2-9D2E-53DB-A073-9FC83665DB17}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,43 @@
+# Full ClinicDesk stack:  docker compose up --build
+#   App            http://localhost:3000   (clinic "demo", demo@clinicdesk.dev / Demo#2025)
+#   API + Swagger  http://localhost:5200/swagger
+#   MailHog        http://localhost:8025   (appointment reminders and invoices)
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: clinicdesk
+      POSTGRES_PASSWORD: clinicdesk
+      POSTGRES_DB: clinicdesk
+    volumes: [pgdata:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U clinicdesk"]
+      interval: 3s
+      retries: 20
+
+  mailhog:
+    image: mailhog/mailhog:v1.0.1
+    ports: ["8025:8025"]
+
+  api:
+    build: .
+    restart: unless-stopped
+    ports: ["5200:8080"]
+    environment:
+      ConnectionStrings__Clinic: Host=postgres;Database=clinicdesk;Username=clinicdesk;Password=clinicdesk
+      Jwt__Key: ${JWT_KEY:-development-only-signing-key-change-me-0123456789}
+      Cors__Origins__0: http://localhost:3000
+      Smtp__Host: mailhog
+      Smtp__Port: "1025"
+      Seed__Demo: "true"
+    depends_on:
+      postgres: { condition: service_healthy }
+
+  web:
+    build: ./web
+    restart: unless-stopped
+    ports: ["3000:80"]
+    depends_on: [api]
+
+volumes:
+  pgdata:
