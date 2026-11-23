@@ -12,8 +12,9 @@ var config = builder.Configuration;
 
 builder.Services.AddSingleton(TimeProvider.System);
 builder.Services.AddScoped<TenantContext>();
-builder.Services.AddDbContext<ClinicDbContext>(o => o.UseNpgsql(config.GetConnectionString("Clinic")
-    ?? "Host=localhost;Database=clinicdesk;Username=clinicdesk;Password=clinicdesk"));
+var connectionString = config.GetConnectionString("Clinic")
+    ?? "Host=localhost;Database=clinicdesk;Username=clinicdesk;Password=clinicdesk";
+builder.Services.AddDbContext<ClinicDbContext>(o => o.UseNpgsql(connectionString));
 
 var jwt = config.GetSection("Jwt").Get<JwtOptions>() ?? new JwtOptions();
 builder.Services.AddSingleton(jwt);
@@ -41,7 +42,7 @@ Policies.Register(builder.Services.AddAuthorizationBuilder());
 builder.Services.AddCors(o => o.AddDefaultPolicy(p => p
     .WithOrigins(config.GetSection("Cors:Origins").Get<string[]>() ?? ["http://localhost:5173"])
     .AllowAnyHeader().AllowAnyMethod()));
-builder.Services.AddHealthChecks().AddDbContextCheck<ClinicDbContext>("database");
+builder.Services.AddHealthChecks().AddNpgSql(connectionString, name: "database");
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(o =>
 {
